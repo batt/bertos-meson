@@ -1,0 +1,6 @@
+images
+obj
+buildrev.h
+.vscode
+*.pyc
+firmware.log
