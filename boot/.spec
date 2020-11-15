@@ -1,0 +1,1 @@
+name = 'slsc-boot preset'

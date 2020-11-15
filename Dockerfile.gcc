@@ -1,0 +1,27 @@
+# latest LTS
+FROM ubuntu:latest
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update \
+    && apt-get upgrade -y \
+    && apt-get install -y \
+        build-essential \
+        bzip2 \
+        gawk \
+        git \
+        grep \
+        make \
+        wget \
+        python \
+        atftp \
+        netcat \
+        gcc-arm-none-eabi \
+        meson \
+        ninja-build
+
+# cannot build as root
+RUN useradd -s /bin/bash --create-home builder
+USER builder
+WORKDIR /home/builder
+CMD cd /home/builder/ 
