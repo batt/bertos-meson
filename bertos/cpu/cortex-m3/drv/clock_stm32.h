@@ -39,7 +39,7 @@
 #define CLOCK_STM32_H
 
 #include <cfg/compiler.h>
-#include <bertos/cpu/detect.h>
+#include <cpu/detect.h>
 
 void clock_init(void);
 
