@@ -1,0 +1,4 @@
+option('modules', type : 'array', yield : true)
+option('hw_dir', type : 'string', yield : true)
+option('cpu', type : 'string', value: 'STM32F207IG', yield : true)
+option('cpu_frequency', type : 'integer', value: 106000000, yield : true)
