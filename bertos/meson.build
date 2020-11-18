@@ -54,12 +54,12 @@ foreach module : bertos_modules
     endif
 endforeach
 
-include_dir = include_directories('.', 'hw')
+include_dir = include_directories('.')
 
 bertos = static_library('bertos',
     c_args: bertos_cflags,
     link_args: ldflags,
-    include_directories: [project_hw_dir, include_dir],
+    include_directories: include_dir,
     install: false,
     dependencies: module_dependencies,
 )
