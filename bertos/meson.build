@@ -35,21 +35,23 @@ if debug
     bertos_cflags += '-D_DEBUG'
 endif
 
-project_dependencies = []
 subdir('cpu')
 subdir('net')
 
-
 # Add dependancies for the enabled modules
-unknown_module = declare_dependency()
 module_dependencies = []
-
+application_dependencies = []
 foreach module : bertos_modules
-    dep = get_variable('@0@_dep'.format(module), unknown_module)
-    if dep == unknown_module
+    mod_dep_name = '@0@_dep'.format(module)
+    if not is_variable(mod_dep_name)
         error('Unknown module \'' + module +'\'')
     endif
-    module_dependencies += dep
+    module_dependencies += get_variable(mod_dep_name)
+
+    app_dep_name = '@0@_app_dep'.format(module)
+    if is_variable(app_dep_name)
+        application_dependencies += get_variable(app_dep_name)
+    endif
 endforeach
 
 include_dir = include_directories('.', 'hw')
@@ -65,5 +67,5 @@ bertos = static_library('bertos',
 bertos_dep = declare_dependency(
     include_directories: include_dir,
     link_with: bertos,
-    dependencies : project_dependencies,
+    dependencies : application_dependencies,
 )

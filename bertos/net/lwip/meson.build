@@ -61,13 +61,13 @@ bertos_lwip_sources = [
 lwip_sources = lwip_corefiles + lwip_core4files + lwip_apifiles + lwip_netiffiles + bertos_lwip_sources
 
 lwip_inc = include_directories('src/include')
-lwip_dep = declare_dependency(
-    sources : files(lwip_sources),
-    include_directories: lwip_inc,
+
+lwip_app_dep = declare_dependency(
+	include_directories: lwip_inc,
 )
 
-if 'lwip' in bertos_modules
-    project_dependencies += declare_dependency(
-        include_directories: lwip_inc,
-    )
-endif
+lwip_dep = declare_dependency(
+    sources : files(lwip_sources),
+    dependencies: lwip_app_dep,
+)
+

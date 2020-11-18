@@ -46,17 +46,14 @@ cpu_core_ldflags = core_ldflags + conf['ldflags'] + linker_script
 cpu_core_inc = include_directories('.')
 cpu_core_cflags = core_cflags + conf['cflags']
 
-cpu_core_dep = declare_dependency(
-    sources : files(core_sources, conf['sources']),
+cpu_core_app_dep = declare_dependency(
     compile_args : cpu_core_cflags,
-    link_args: cpu_core_ldflags,
     include_directories: cpu_core_inc,
 )
 
-if 'cpu_core' in bertos_modules
-    project_dependencies += declare_dependency(
-        compile_args : cpu_core_cflags,
-        link_args: cpu_core_ldflags,
-        include_directories: cpu_core_inc,
-    )
-endif
+cpu_core_dep = declare_dependency(
+    sources : files(core_sources, conf['sources']),
+    dependencies : cpu_core_app_dep,
+    link_args: cpu_core_ldflags,
+)
+

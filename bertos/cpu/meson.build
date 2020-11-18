@@ -23,13 +23,10 @@ cpu_dep = declare_dependency(
     compile_args: cpu_cflags,
 )
 
-if 'cpu' in bertos_modules
-    project_dependencies += declare_dependency(
-        compile_args : bertos_cflags,
-        dependencies : cpu_dep,
-    )
-endif
-
+cpu_app_dep = declare_dependency(
+    compile_args : bertos_cflags,
+    dependencies : cpu_dep,
+)
 
 core = cpu_attributes[cpu]['core']
 subdir(core)
