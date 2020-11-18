@@ -19,13 +19,12 @@ cpu_cflags = ['-DARCH=(ARCH_DEFAULT)', '-DWIZ_AUTOGEN']
 cpu_cflags += '-DCPU_FREQ=@0@UL'.format(cpu_freq)
 cpu_cflags += cpu_attributes[cpu]['cflags']
 
-cpu_dep = declare_dependency(
-    compile_args: cpu_cflags,
+cpu_app_dep = declare_dependency(
+    compile_args : cpu_cflags,
 )
 
-cpu_app_dep = declare_dependency(
-    compile_args : bertos_cflags,
-    dependencies : cpu_dep,
+cpu_dep = declare_dependency(
+    compile_args: cpu_cflags,
 )
 
 core = cpu_attributes[cpu]['core']
