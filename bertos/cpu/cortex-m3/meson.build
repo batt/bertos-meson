@@ -11,7 +11,7 @@ family_list = {
 }
 
 linker_scripts_flags = {
-    'STM32F207IG': '-L@0@ -Tstm32f207ig_rom.ld',
+    'STM32F207IG': '-L@0@ -Tbertos/cpu/cortex-m3/scripts/stm32f207ig_rom.ld',
 }
 
 if not (cpu in family_list)
