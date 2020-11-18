@@ -1,4 +1,5 @@
 project('STM32 bootlolader', 'c', default_options: ['b_asneeded=false'])
+debug = get_option('debug')
 
 bertos_modules = [
 	'cpu',
@@ -36,6 +37,10 @@ cflags = ['-UARCH',
 	'-fno-strict-aliasing',
 	'-fwrapv',
 ]
+
+if debug
+    cflags += '-D_DEBUG'
+endif
 
 main = executable('boot', [csrc],
 	name_suffix : 'elf',
