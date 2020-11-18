@@ -4,7 +4,8 @@ bertos_modules = get_option('modules')
 cpu = get_option('cpu')
 cpu_freq = get_option('cpu_frequency')
 debug = get_option('debug')
-project_hw_dir = include_directories('../../.')
+
+app_dir = get_option('app_dir')
 
 bertos_path = meson.current_source_dir()
 

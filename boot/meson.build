@@ -10,7 +10,7 @@ bertos = subproject('bertos', default_options: [
 	'modules=@0@'.format(bertos_modules),
 	'cpu=STM32F207IG',
 	'cpu_frequency=106000000',
-	'hw_dir=@0@'.format(include_directories('.')),
+	'app_dir=' + meson.current_source_dir(),
 ])
 
 bertos_dep = bertos.get_variable('bertos_dep')
