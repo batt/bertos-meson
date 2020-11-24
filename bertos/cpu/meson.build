@@ -2,7 +2,7 @@ message('CPU: ' + cpu)
 message('CPU frequency: @0@Hz'.format(cpu_freq))
 
 cpu_attributes = {
-    'STM32F207IG': { 'cflags': '-D__ARM_STM32F207IG__', 'core' : 'cortex-m3' },
+    'STM32F207IG': { 'cflags': '-D__ARM_STM32F207IG__', 'core' : 'cortex-m3', 'family' : 'stm32' },
     #add other CPUs here
 }
 
@@ -27,5 +27,6 @@ cpu_dep = declare_dependency(
     compile_args: cpu_cflags,
 )
 
-core = cpu_attributes[cpu]['core']
-subdir(core)
+cpu_core = cpu_attributes[cpu]['core']
+cpu_family = cpu_attributes[cpu]['family']
+subdir(cpu_core)

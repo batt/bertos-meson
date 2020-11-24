@@ -5,14 +5,23 @@ bertos_modules = [
 	'cpu',
 	'cpu_core',
 	'lwip',
+	'crc_ccitt',
+	'proc',
+	'signal',
+	'timer',
+	'flash',
 ]
+
+prj_dir = meson.current_source_dir()
+
 
 bertos = subproject('bertos', default_options: [
 	'modules=@0@'.format(bertos_modules),
 	'cpu=STM32F207IG',
 	'cpu_frequency=106000000',
-	'app_dir=' + meson.current_source_dir(),
+	'app_dir=' + prj_dir,
 ])
+
 
 bertos_dep = bertos.get_variable('bertos_dep')
 
@@ -46,9 +55,7 @@ main = executable('boot', [csrc],
 	name_suffix : 'elf',
 	c_args : cflags,
 	include_directories : include_directories('.'),
-	dependencies: bertos_dep )
-
-
-
+	dependencies: bertos_dep
+)
 
 

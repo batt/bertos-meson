@@ -34,9 +34,25 @@ bertos_cflags = optflags + debugcflags + warnflags + c_warnflags + listflags + c
 
 if debug
     bertos_cflags += '-D_DEBUG'
+    bertos_modules += 'kdebug'
 endif
 
+cpcfg = find_program('cpcfg.py')
+cfg_src = 'cfg_src.h'
+app_cfg = custom_target('gen-cfg',
+    input : app_dir,
+    output : cfg_src,
+    command : [cpcfg, '@INPUT@', '@OUTPUT@'],
+    build_by_default : true
+)
+
 subdir('cpu')
+
+subdir('algo')
+subdir('io')
+subdir('drv')
+subdir('kern')
+subdir('mware')
 subdir('net')
 
 # Add dependancies for the enabled modules
@@ -57,7 +73,7 @@ endforeach
 
 include_dir = include_directories('.')
 
-bertos = static_library('bertos',
+bertos = static_library('bertos', app_cfg,
     c_args: bertos_cflags,
     link_args: ldflags,
     include_directories: include_dir,

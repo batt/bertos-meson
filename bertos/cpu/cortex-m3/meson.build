@@ -57,3 +57,8 @@ cpu_core_dep = declare_dependency(
     link_args: cpu_core_ldflags,
 )
 
+cpu_kern_dep = declare_dependency(
+    sources: files('hw/switch_ctx_cm3.c')
+)
+
+subdir('drv')

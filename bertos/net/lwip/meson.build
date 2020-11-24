@@ -51,8 +51,6 @@ lwip_netiffiles = [
 	'src/netif/slipif.c',
 ]
 
-#-Ibertos/net/lwip/src/include -Ibertos/net/lwip/src/include/ipv4
-
 bertos_lwip_sources = [
     'src/arch/sys_arch.c',
     '../ethernetif.c',
