@@ -10,6 +10,7 @@ bertos_modules = [
 	'signal',
 	'timer',
 	'flash',
+	'tftp',
 ]
 
 prj_dir = meson.current_source_dir()

@@ -8,6 +8,7 @@ hex_dep  = declare_dependency(
 
 formatwr_dep = declare_dependency(
     sources : files('formatwr.c'),
+    dependencies : hex_dep
 )
 
 sprintf_dep = declare_dependency(

@@ -34,7 +34,7 @@ bertos_cflags = optflags + debugcflags + warnflags + c_warnflags + listflags + c
 
 if debug
     bertos_cflags += '-D_DEBUG'
-    bertos_modules += 'kdebug'
+    bertos_modules += ['kdebug', 'formatwr']
 endif
 
 cpcfg = find_program('cpcfg.py')
