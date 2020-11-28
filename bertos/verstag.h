@@ -44,27 +44,12 @@
 	#include "cfg/cfg_arch.h"
 #endif
 
-#if (ARCH & ARCH_KK348)
-	#define APP_NAME        "KK348"
-	#define APP_DESCRIPTION ""
-	#define APP_AUTHOR      "Develer"
-	#define APP_COPYRIGHT   "Copyright 2019 Develer (http://www.develer.com/)"
-
-	#define FIRMWARE_VERSION 220
-#elif (ARCH & ARCH_KK353)
-	#define APP_NAME        "KK353"
-	#define APP_DESCRIPTION ""
-	#define APP_AUTHOR      "Develer"
-	#define APP_COPYRIGHT   "Copyright 2019 Develer (http://www.develer.com/)"
-
-	#define FIRMWARE_VERSION 120
-#elif (ARCH & ARCH_KK354)
-	#define APP_NAME        "KK354"
-	#define APP_DESCRIPTION ""
-	#define APP_AUTHOR      "Develer"
-	#define APP_COPYRIGHT   "Copyright 2019 Develer (http://www.develer.com/)"
-
-	#define FIRMWARE_VERSION 130
+#if (ARCH & ARCH_DEFAULT)
+	#define APP_NAME         "BeRTOS"
+	#define APP_DESCRIPTION  ""
+	#define APP_AUTHOR       "Develer"
+	#define APP_COPYRIGHT    "Copyright 2020 Develer (http://www.develer.com/)"
+	#define FIRMWARE_VERSION 0
 #elif (ARCH & ARCH_BOOT)
 	#define APP_NAME        "boot"
 	#define APP_DESCRIPTION ""
@@ -72,20 +57,6 @@
 	#define APP_COPYRIGHT   "Copyright 2019 Develer (http://www.develer.com/)"
 
 	#define FIRMWARE_VERSION 220
-#elif (ARCH & ARCH_ETH_TEST)
-	#define APP_NAME        "eth_test"
-	#define APP_DESCRIPTION ""
-	#define APP_AUTHOR      "Develer"
-	#define APP_COPYRIGHT   "Copyright 2020 Develer (http://www.develer.com/)"
-
-	#define FIRMWARE_VERSION 0
-#elif (ARCH & ARCH_DSPLOG)
-	#define APP_NAME        "dsplog"
-	#define APP_DESCRIPTION ""
-	#define APP_AUTHOR      "Develer"
-	#define APP_COPYRIGHT   "Copyright 2020 Develer (http://www.develer.com/)"
-
-	#define FIRMWARE_VERSION 20
 
 #else
 	#error "ARCH not defined!"
