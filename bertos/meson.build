@@ -26,8 +26,6 @@ c_warnflags = [
 listflags = ['-dp'] ##-Wa,-anhlmsd=$(@:.o=.lst)
 c_compiler_std = ['-std=gnu99']
 
-MAP_FLAGS = [] ##-Wl,-Map=$(@:%.elf=%.map),--cref
-
 ldflags = ['-Wl,--gc-sections']
 
 bertos_debugflags = []
