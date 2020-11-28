@@ -30,12 +30,15 @@ MAP_FLAGS = [] ##-Wl,-Map=$(@:%.elf=%.map),--cref
 
 ldflags = ['-Wl,--gc-sections']
 
-bertos_cflags = optflags + debugcflags + warnflags + c_warnflags + listflags + c_compiler_std
+bertos_debugflags = []
 
 if debug
-    bertos_cflags += '-D_DEBUG'
+    bertos_debugflags += '-D_DEBUG'
     bertos_modules += ['kdebug', 'formatwr']
 endif
+
+
+bertos_cflags = bertos_debugflags + optflags + debugcflags + warnflags + c_warnflags + listflags + c_compiler_std
 
 cpcfg = find_program('cpcfg.py')
 cfg_src = 'cfg_src.h'
@@ -74,15 +77,17 @@ endforeach
 include_dir = include_directories('.')
 
 bertos = static_library('bertos', app_cfg,
+    sources: files('verstag.c'),
     c_args: bertos_cflags,
-    link_args: ldflags,
     include_directories: include_dir,
     install: false,
     dependencies: module_dependencies,
 )
 
 bertos_dep = declare_dependency(
+    compile_args: optflags + bertos_debugflags,
     include_directories: include_dir,
     link_with: bertos,
+    link_args: ldflags,
     dependencies : application_dependencies,
 )
