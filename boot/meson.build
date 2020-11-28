@@ -47,6 +47,8 @@ cflags = ['-UARCH',
 	'-DARCH=ARCH_BOOT',
 	'-fno-strict-aliasing',
 	'-fwrapv',
+	'-ffunction-sections',
+	'-fdata-sections',
 ]
 
 boot = executable('boot', [csrc],
