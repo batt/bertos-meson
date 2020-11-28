@@ -12,6 +12,8 @@ gdb     = 'arm-none-eabi-gdb'
 
 
 [properties]
+#meson add this automatically, remove it.
+c_args = '-U_FILE_OFFSET_BITS'
 
 needs_exe_wrapper = true
 
