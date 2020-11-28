@@ -37,7 +37,7 @@
 
 #ifndef CFG_LWIP_H
 #define CFG_LWIP_H
-
+#warning "Includo il file SBAGLIATO!"
 #ifdef _DEBUG
 	#define LWIP_DEBUG
 #endif
