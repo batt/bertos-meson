@@ -1,10 +1,11 @@
 
-core_cflags = ['-mcpu=cortex-m3', '-O0', '-g3', '-gdwarf-2', '-mthumb', '-mno-thumb-interwork',
+core_cflags = ['-mcpu=cortex-m3', '-g3', '-gdwarf-2', '-mthumb', '-mno-thumb-interwork',
                 '-fno-strict-aliasing', '-fwrapv', '-fverbose-asm']
 
 core_ldflags = ['-mthumb', '-mno-thumb-interwork', '-nostartfiles', '-Wl,--no-warn-mismatch']
 
-core_sources = ['hw/init_cm3.c', 'drv/irq_cm3.c', 'hw/crt_cm3.S', 'hw/vectors_cm3.S']
+core_sources = ['hw/init_cm3.c', 'drv/irq_cm3.c',]
+core_app_sources = ['hw/crt_cm3.S', 'hw/vectors_cm3.S']
 
 family_list = {
     'STM32F207IG': 'stm32',
@@ -47,6 +48,7 @@ cpu_core_inc = include_directories('.')
 cpu_core_cflags = core_cflags + conf['cflags']
 
 cpu_core_app_dep = declare_dependency(
+    sources : files(core_app_sources),
     compile_args : cpu_core_cflags,
     include_directories: cpu_core_inc,
 )
