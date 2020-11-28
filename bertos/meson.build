@@ -11,7 +11,7 @@ bertos_path = meson.current_source_dir()
 
 message('Active BeRTOS modules: @0@'.format(bertos_modules))
 
-optflags = ['-ffunction-sections', '-fdata-sections']
+optflags = ['-ffunction-sections', '-fdata-sections', '-fwrapv', '-fno-strict-aliasing']
 debugcflags = ['-ggdb']
 warnflags = [
 	'-W', '-Wformat', '-Wall', '-Wundef', '-Wpointer-arith', '-Wcast-qual',
@@ -85,7 +85,7 @@ bertos = static_library('bertos', app_cfg,
 )
 
 bertos_dep = declare_dependency(
-    compile_args: optflags + bertos_debugflags,
+    compile_args: bertos_debugflags,
     include_directories: include_dir,
     link_with: bertos,
     link_args: ldflags,
