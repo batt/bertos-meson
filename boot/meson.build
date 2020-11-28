@@ -1,5 +1,4 @@
-project('STM32 bootlolader', 'c', default_options: ['b_asneeded=false'])
-debug = get_option('debug')
+project('STM32 bootlolader', 'c', default_options: ['optimization=s', 'debug=true'])
 
 bertos_modules = [
 	'cpu',
@@ -21,7 +20,6 @@ bertos_modules = [
 
 prj_dir = meson.current_source_dir()
 
-
 bertos = subproject('bertos', default_options: [
 	'modules=@0@'.format(bertos_modules),
 	'cpu=STM32F207IG',
@@ -31,8 +29,6 @@ bertos = subproject('bertos', default_options: [
 
 
 bertos_dep = bertos.get_variable('bertos_dep')
-
-debug = true
 
 csrc = [
     'main.c',
@@ -49,20 +45,29 @@ csrc = [
 
 cflags = ['-UARCH',
 	'-DARCH=ARCH_BOOT',
-	'-Os',
 	'-fno-strict-aliasing',
 	'-fwrapv',
 ]
 
-if debug
-    cflags += '-D_DEBUG'
-endif
-
-main = executable('boot', [csrc],
+boot = executable('boot', [csrc],
 	name_suffix : 'elf',
 	c_args : cflags,
+	link_args: '-Wl,-Map=boot.map,--cref', 
 	include_directories : include_directories('.'),
 	dependencies: bertos_dep
 )
 
+objcopy = find_program('objcopy')
+boot_bin = custom_target('boot.bin', 
+	output: 'boot.bin',
+	build_by_default: true,
+	command: [objcopy, '-O', 'binary', 'boot.elf', '@OUTPUT@'],
+	depends: boot,
+)
 
+boot_hex = custom_target('boot.hex', 
+	output: 'boot.hex',
+	build_by_default: true,
+	command: [objcopy, '-O', 'ihex', 'boot.elf', '@OUTPUT@'],
+	depends: boot,
+)
