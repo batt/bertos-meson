@@ -7,22 +7,9 @@ core_ldflags = ['-mthumb', '-mno-thumb-interwork', '-nostartfiles', '-Wl,--no-wa
 core_sources = ['drv/irq_cm3.c',]
 core_app_sources = ['hw/crt_cm3.S', 'hw/vectors_cm3.S', 'hw/init_cm3.c']
 
-family_list = {
-    'STM32F207IG': 'stm32',
-}
-
 linker_scripts_flags = {
     'STM32F207IG': '-L@0@ -Tbertos/cpu/cortex-m3/scripts/stm32f207ig_rom.ld',
 }
-
-if not (cpu in family_list)
-    message('Unknown CPU family!')
-    message('List of supported families:')
-    foreach c, val : family_list
-        message(val)
-    endforeach
-    error('Unknown CPU family for ' + cpu)
-endif
 
 linker_script = []
 if cpu in linker_scripts_flags
@@ -32,16 +19,13 @@ if cpu in linker_scripts_flags
     message('Using linker script flags: @0@'.format(linker_script))
 endif
 
-
-family = family_list[cpu]
-
 stm32_conf = {
     'cflags' :  [],
     'sources' : ['drv/gpio_stm32.c', 'drv/clock_stm32.c'],
     'ldflags' : [],
 }
 
-conf = get_variable('@0@_conf'.format(family))
+conf = get_variable('@0@_conf'.format(cpu_family))
 
 cpu_core_ldflags = core_ldflags + conf['ldflags'] + linker_script
 cpu_core_inc = include_directories('.')
