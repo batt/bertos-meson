@@ -11,7 +11,7 @@ bertos_path = meson.current_source_dir()
 
 message('Active BeRTOS modules: @0@'.format(bertos_modules))
 
-optflags = ['-U_FILE_OFFSET_BITS', '-ffunction-sections', '-fdata-sections', '-fwrapv', '-fno-strict-aliasing']
+optflags = ['-ffunction-sections', '-fdata-sections', '-fwrapv', '-fno-strict-aliasing']
 debugcflags = ['-ggdb']
 warnflags = [
 	'-W', '-Wformat', '-Wall', '-Wundef', '-Wpointer-arith', '-Wcast-qual',
