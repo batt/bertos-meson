@@ -1,4 +1,4 @@
-project('STM32 bootlolader', 'c', default_options: ['optimization=s', 'debug=true'])
+project('STM32 bootlolader', 'c', default_options: ['optimization=s', 'debug=true', 'b_pie=false', 'b_staticpic=false', 'b_asneeded=false'])
 
 bertos_modules = [
 	'cpu',

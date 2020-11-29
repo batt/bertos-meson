@@ -1,4 +1,4 @@
-project('BeRTOS', 'c')
+project('BeRTOS', 'c', default_options: ['optimization=s', 'debug=true', 'b_pie=false', 'b_staticpic=false'])
 
 bertos_modules = get_option('modules')
 cpu = get_option('cpu')
