@@ -4,8 +4,8 @@ core_cflags = ['-mcpu=cortex-m3', '-g3', '-gdwarf-2', '-mthumb', '-mno-thumb-int
 
 core_ldflags = ['-mthumb', '-mno-thumb-interwork', '-nostartfiles', '-Wl,--no-warn-mismatch']
 
-core_sources = ['hw/init_cm3.c', 'drv/irq_cm3.c',]
-core_app_sources = ['hw/crt_cm3.S', 'hw/vectors_cm3.S']
+core_sources = ['drv/irq_cm3.c',]
+core_app_sources = ['hw/crt_cm3.S', 'hw/vectors_cm3.S', 'hw/init_cm3.c']
 
 family_list = {
     'STM32F207IG': 'stm32',
