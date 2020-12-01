@@ -55,6 +55,8 @@ app_cfg = custom_target('gen-cfg',
     build_by_default : true
 )
 
+# cpu dir must be included first because it contains
+# cpu driver dependencies definitions.
 subdir('cpu')
 
 subdir('algo')
@@ -64,9 +66,10 @@ subdir('kern')
 subdir('mware')
 subdir('net')
 
-# Add dependancies for the enabled modules
+# Add dependencies for the enabled modules
 module_dependencies = []
 application_dependencies = []
+
 foreach module : bertos_modules
     mod_dep_name = '@0@_dep'.format(module)
     if not is_variable(mod_dep_name)
