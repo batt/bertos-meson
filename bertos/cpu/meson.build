@@ -1,5 +1,7 @@
 message('CPU: ' + cpu)
-message('CPU frequency: @0@Hz'.format(cpu_freq))
+if cpu_freq != 0
+    message('CPU frequency: @0@Hz'.format(cpu_freq))
+endif
 
 cpu_attributes = {
     'STM32F207IG': { 'cflags': '-D__ARM_STM32F207IG__', 'core' : 'cortex-m3', 'family' : 'stm32' },
@@ -15,12 +17,18 @@ if not (cpu in cpu_attributes)
     error('Unknown CPU: ' + cpu)
 endif
 
-cpu_cflags = ['-DARCH=(ARCH_DEFAULT)', '-DWIZ_AUTOGEN']
-cpu_cflags += '-DCPU_FREQ=@0@UL'.format(cpu_freq)
-cpu_cflags += cpu_attributes[cpu]['cflags']
+cpu_definition_flags = cpu_attributes[cpu]['cflags']
+cpu_cflags = ['-DARCH=(ARCH_DEFAULT)', cpu_definition_flags]
+cpu_core_cflags = ['-DWIZ_AUTOGEN']
+cpu_freq_flags = []
+
+if cpu_freq != 0
+    cpu_freq_flags = '-DCPU_FREQ=@0@UL'.format(cpu_freq)
+    cpu_core_cflags += cpu_freq_flags
+endif
 
 cpu_app_dep = declare_dependency(
-    compile_args : cpu_cflags,
+    compile_args : cpu_definition_flags,
 )
 
 cpu_dep = declare_dependency(

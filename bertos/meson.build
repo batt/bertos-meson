@@ -1,15 +1,23 @@
 project('BeRTOS', 'c', default_options: ['optimization=s', 'debug=true', 'b_pie=false', 'b_staticpic=false'])
 
-bertos_modules = get_option('modules')
 cpu = get_option('cpu')
+
+if cpu == ''
+    error('CPU not set')
+endif
+
 cpu_freq = get_option('cpu_frequency')
 debug = get_option('debug')
 
 app_dir = get_option('app_dir')
 
-bertos_path = meson.current_source_dir()
+bertos_modules = get_option('modules')
+#Base CPU definition module is always needed
+bertos_modules += 'cpu'
 
 message('Active BeRTOS modules: @0@'.format(bertos_modules))
+
+bertos_path = meson.current_source_dir()
 
 optflags = ['-ffunction-sections', '-fdata-sections', '-fwrapv', '-fno-strict-aliasing']
 debugcflags = ['-ggdb']

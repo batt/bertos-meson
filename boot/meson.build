@@ -1,7 +1,6 @@
 project('STM32 bootlolader', 'c', default_options: ['optimization=s', 'debug=true', 'b_pie=false', 'b_staticpic=false', 'b_asneeded=false'])
 
 bertos_modules = [
-	'cpu',
 	'cpu_core',
 	'eeprom',
 	'eth',
@@ -49,6 +48,21 @@ cflags = ['-UARCH',
 	'-fwrapv',
 	'-ffunction-sections',
 	'-fdata-sections',
+	'-mcpu=cortex-m3', 
+	'-ggdb',
+	'-g3', '-gdwarf-2',
+	'-mthumb', '-mno-thumb-interwork',
+    '-fwrapv', '-fverbose-asm',
+
+	'-W', '-Wformat', '-Wall', '-Wundef', '-Wpointer-arith', '-Wcast-qual',
+	'-Wcast-align', '-Wwrite-strings', '-Wsign-compare',
+	'-Wmissing-noreturn',
+	'-Wextra', '-Wstrict-aliasing=2',
+
+	'-Wmissing-prototypes', '-Wstrict-prototypes',
+	'-Wno-cast-function-type',
+
+	'-std=gnu99'
 ]
 
 boot = executable('boot', [csrc],

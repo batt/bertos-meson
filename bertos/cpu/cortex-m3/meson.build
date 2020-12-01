@@ -29,18 +29,19 @@ conf = get_variable('@0@_conf'.format(cpu_family))
 
 cpu_core_ldflags = core_ldflags + conf['ldflags'] + linker_script
 cpu_core_inc = include_directories('.')
-cpu_core_cflags = core_cflags + conf['cflags']
+cpu_core_cflags += core_cflags + conf['cflags']
 
 cpu_core_app_dep = declare_dependency(
     sources : files(core_app_sources),
-    compile_args : cpu_core_cflags,
+    compile_args : cpu_freq_flags,
     include_directories: cpu_core_inc,
 )
 
 cpu_core_dep = declare_dependency(
     sources : files(core_sources, conf['sources']),
-    dependencies : cpu_core_app_dep,
+    compile_args : cpu_core_cflags,
     link_args: cpu_core_ldflags,
+    include_directories: cpu_core_inc,
 )
 
 cpu_kern_dep = declare_dependency(
