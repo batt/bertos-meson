@@ -104,6 +104,8 @@ Allo stesso tempo, essendo un progetto separato, utilizza anche dei flag di comp
 
 
 ## Cosa manca
+
+### Configurazione e driver (files `_cfg.h` e directory `hw`)
 Prima di mettere tutto eventualmente in produzione, il sistema di configurazione (i file `_cfg.h`) e la modalità con cui si specifica la parte di basso livello dei driver (directory `hw` dell'applicazione), vanno completamente rivisti.
 
 In particolare, per l'utilizzo della directory `hw`, il vecchio sistema di build di BeRTOS usa un "trucco": include la directory `hw` dell'applicazione tra i path di ricerca _prima_ dei path interni di BeRTOS. Durante la compilazione vengono così trovati i file hw specifici della app.
@@ -115,3 +117,6 @@ Per adesso ho bovinamente copiato le directory `hw` e `cfg` dall'applicazione qu
 Andrebbe secondo me cambiata l'architettura di questa cosa. Per i file cfg potremmo stabilire un default e passare a BeRTOS solo le opzioni che sono diverse da esso tramite il meccanismo di opzioni di configurazione di meson.
 
 Per la parte hw, trattandosi di macro che contengono codice, sinceramente non ho idee valide. Potremmo trasformarle in funzioni/callback da passare, ma perderemmo tantissimo in prestazioni. Sono aperto a nuove idee su questo.
+
+### Testing
+Ho visto che meson "conosce" nativamente il concetto di test, ma non ho approfondito. Dovremmo portare tutti i test attuali di BeRTOS e includerli in meson.
